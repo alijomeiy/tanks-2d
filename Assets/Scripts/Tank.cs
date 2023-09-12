@@ -8,16 +8,16 @@ public class Tank : MonoBehaviour
     [SerializeField] public float moveSpeed;
     private Vector2 _shootDirection;
     private float _shootPower;
-    private Rigidbody2D _rigidbody2D;
-    
-    void Awake()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+    public Rigidbody2D WheelRigidbody2D;
+    private float degree;
 
     public void Move()
     {
-        _rigidbody2D.AddForce(Vector3.right*moveSpeed);
+        degree = transform.localRotation.eulerAngles.x;
+        float xcomponent = Mathf.Cos(degree * Mathf.PI / 180) * moveSpeed;
+        float ycomponent = Mathf.Sin(degree * Mathf.PI / 180) * moveSpeed;
+        WheelRigidbody2D.transform.position+= new Vector3(xcomponent, ycomponent, 0)*Time.deltaTime;
+        
     }
 
     public void SetShootPower()
