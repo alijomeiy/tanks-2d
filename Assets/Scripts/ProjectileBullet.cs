@@ -9,8 +9,9 @@ public class ProjectileBullet : Bullet
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
+    // public void Updeta()
 
-    public override void Shoot(Vector2 force)
+    public override void Shoot(Vector2 force, Vector3 BulletPosition)
     {
         _rigidbody.AddForce(force, ForceMode2D.Impulse);
     }

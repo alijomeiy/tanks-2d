@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
@@ -6,8 +7,14 @@ public class Tank : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private List<Bullet> projectiles;
     [SerializeField] public float moveSpeed;
-    private Vector2 _shootDirection;
-    private float _shootPower;
+    [SerializeField] public GameObject Turret;
+    [SerializeField] public GameObject BulletShootingPointer;
+    // private _shootX and _shootY
+    public float _shootX;
+    public float _shootY;
+    //
+    
+    
     public Rigidbody2D WheelRigidbody2D;
     private float degree;
 
@@ -20,14 +27,14 @@ public class Tank : MonoBehaviour
         
     }
 
-    public void SetShootPower()
+    public void SetShootX(float amount)
     {
-
+        _shootX += amount;
     }
 
-    public void SetShootDegree()
+    public void SetShootY(float amount)
     {
-
+        _shootY += amount;
     }
 
     public void Shoot()
@@ -35,11 +42,25 @@ public class Tank : MonoBehaviour
         var lastIndex = projectiles.Count - 1;
         var projectile = projectiles[lastIndex];
         projectiles.RemoveAt(lastIndex);
-        projectile.Shoot(_shootDirection * _shootPower);
+        projectile.transform.rotation = Turret.transform.rotation;
+        projectile.Shoot(new Vector2(_shootX, _shootY), BulletShootingPointer.transform.position);
     }
 
     public void ChangeHealth(float delta)
     {
         health += delta;
+    }
+
+    public void TurretLookAt()
+    {   
+
+            Vector3 targetPos = Turret.transform.position + new Vector3(_shootX, _shootY, 0);
+            targetPos.z = Turret.transform.position.z;
+
+            Vector3 lookDir = targetPos - Turret.transform.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+
+            Turret.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            BulletShootingPointer.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }
