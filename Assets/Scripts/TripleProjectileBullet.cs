@@ -13,15 +13,15 @@ public class TripleProjectileBullet : Bullet
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        Shoot(new Vector2(5,5),transform.position);
+        Shoot(new Vector2(5,5),gameObject);
     }
 
-    public override void Shoot(Vector2 force, Vector3 BulletPosition)
+    public override void Shoot(Vector2 force, GameObject ShotPoint)
     {
         StaticForce = force;
-        GameObject Bullet1 = Instantiate(Bullet_1,BulletPosition,Quaternion.identity);
-        GameObject Bullet2 = Instantiate(Bullet_2,BulletPosition,Quaternion.identity);
-        GameObject Bullet3 = Instantiate(Bullet_3,BulletPosition,Quaternion.identity);
+        GameObject Bullet1 = Instantiate(Bullet_1,ShotPoint.transform.position,ShotPoint.transform.rotation);
+        GameObject Bullet2 = Instantiate(Bullet_2,ShotPoint.transform.position,ShotPoint.transform.rotation);
+        GameObject Bullet3 = Instantiate(Bullet_3,ShotPoint.transform.position,ShotPoint.transform.rotation);
     }
 
 }

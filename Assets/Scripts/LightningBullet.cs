@@ -9,9 +9,9 @@ public class LighitngBullet : Bullet
     public GameObject Bullet;
 
 
-    public override void Shoot(Vector2 force, Vector3 BulletPosition)
+    public override void Shoot(Vector2 force, GameObject ShotPoint)
     {
-        GameObject projectile = Instantiate(Bullet,BulletPosition,Quaternion.identity);
+        GameObject projectile = Instantiate(Bullet,ShotPoint.transform.position, ShotPoint.transform.rotation);
         projectile.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
         Debug.Log("LightningShoot");
     }

@@ -11,7 +11,7 @@ public class ProjectileBullet : Bullet
     }
     // public void Updeta()
 
-    public override void Shoot(Vector2 force, Vector3 BulletPosition)
+    public override void Shoot(Vector2 force, GameObject ShotPoint)
     {
         _rigidbody.AddForce(force, ForceMode2D.Impulse);
     }

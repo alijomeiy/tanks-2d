@@ -43,7 +43,7 @@ public class Tank : MonoBehaviour
         var projectile = projectiles[lastIndex];
         projectiles.RemoveAt(lastIndex);
         projectile.transform.rotation = Turret.transform.rotation;
-        projectile.Shoot(new Vector2(_shootX, _shootY), BulletShootingPointer.transform.position);
+        projectile.Shoot(new Vector2(_shootX, _shootY), BulletShootingPointer);
     }
 
     public void ChangeHealth(float delta)

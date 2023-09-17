@@ -9,13 +9,12 @@ public class DEMO : MonoBehaviour
     private string _movementState;
     private string _shootXState;
     private string _shootYState;
-    private float _shootDirectionChangingAmount;
+    public float _shootDirectionChangingAmount;
 
     // Start is called before the first frame update
     void Awake()
     {
         _tankComp = tank.GetComponent<Tank>();
-        _shootDirectionChangingAmount = 3;
     }
 
     // Update is called once per frame
